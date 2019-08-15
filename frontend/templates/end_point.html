@@ -23,29 +23,13 @@
             <img src="https://i.imgur.com/ImfrcPF.jpg" alt="IMG" />
           </div>
 
-          <form class="login-form" method="post" action="/login">
-            <span class="form-title">Login Now</span>
+          <form class="login-form">
+            <span class="form-title">Congradulations</span>
 
-            <div class="wrap-input validate-input">
-              <input class="input" type="text" name="username" placeholder="Username"/>
-              <span class="focus-input"></span>
-              <span class="symbol-input"><i class="fa fa-user" aria-hidden="true"></i></span>
+            <div>
+                <p><center>You have successfully logged into your account!<br>
+                This project was created by Aleksey Titov for CISC 3140</center></p>
             </div>
-
-            <div class="wrap-input validate-input" data-validate="Password is required">
-              <input class="input" type="password" name="password" placeholder="Password"/>
-              <span class="focus-input"></span>
-              <span class="symbol-input"><i class="fa fa-lock" aria-hidden="true"></i></span>
-            </div>
-
-            {% if error %}
-              <p><center><i class="fa fa-window-close"></i> {{ error }}<br>
-              Please Try Again!</center></p>
-            {% endif %}
-
-            {% if msg %}
-            <p><center><i class="fa fa-check-square"></i> {{ msg }}</center></p>
-            {% endif %}
 
             <div class="container-login-btn">
               <button class="login-form-btn">Login</button>
