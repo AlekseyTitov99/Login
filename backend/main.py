@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
 import atexit, yaml
 
 app = Flask(__name__, template_folder='../frontend/templates', static_folder='../frontend/static')
@@ -15,12 +15,15 @@ def login():
 
     if request.method == 'POST':
 
+        # Requesting from web page
         username = request.form['username']
         password = request.form['password']
 
-        if has_account(username):
+        # Making sure account exists
+        if has_account(username.lower()):
 
-            if password_validator(username, password):
+            # Making sure password matches
+            if password_validator(username.lower(), password):
                 return render_template("end_point.html")
 
             else:
@@ -44,10 +47,12 @@ def register_handler():
 
     if request.method == 'POST':
 
+        # Requesting from web page
         username = request.form['username']
         password = request.form['password']
         re_password = request.form['re-password']
 
+        # A bunch of small checks
         if 4 > len(password) < 20:
             error = 'Passwords must be 4 - 20 characters.'
             return render_template('register.html', error=error)
@@ -67,7 +72,6 @@ def register_handler():
         else:
             create_account(username.lower(), password)
             save()
-            redirect({{url_for('login')}})
             msg = 'Account created - Login now!'
             return render_template('index.html', msg=msg)
 
@@ -78,8 +82,6 @@ def register_handler():
 # Method to add new accounts into dictionary
 def create_account(username, password):
     account_dic[username] = password
-    print(username + " created")
-    print(account_dic)
 
 
 # Method to check if password is valid
@@ -113,7 +115,7 @@ def has_account(username):
 # Save dictionary into a yml
 def save():
     with open('storage.yml', 'w') as f:
-        data = yaml.dump(account_dic, f)
+        yaml.dump(account_dic, f)
 
 
 # Load yml file into dictionary
